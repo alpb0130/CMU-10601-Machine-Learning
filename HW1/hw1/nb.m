@@ -1,11 +1,13 @@
 function [ v ] = nb( d, t )
 %   Naive Bayes algorithm
 %   Fill in your codes here.
+%	Author: Linpeng Lyu (Andrew ID: linpengl)
+%   If use log here, underflow could be avoided. * --> +
 
 % training data matrix for class 1 and 2
-d12 = d(find(d(:,3)~=3), :);
-d1 = d(find(d(:,3)==1), :);
-d2 = d(find(d(:,3)==2), :);
+d12 = d(find(d(:, 3) ~= 3), :);
+d1 = d(find(d(:, 3) == 1), :);
+d2 = d(find(d(:, 3) == 2), :);
 
 % Prior for class 1 and class 2. They are double type numbers.
 prior1 = length(d1) / length(d12);
@@ -34,6 +36,6 @@ pv1 = p1x .* p1y * prior1 ./ (p1x .* p1y * prior1 + p2x .* p2y * prior2);
 pv2 = p2x .* p2y * prior2 ./ (p1x .* p1y * prior1 + p2x .* p2y * prior2);
 
 % Prediction
-v = ones(length(t),1) + (pv1 < pv2);
+v = ones(length(t), 1) + (pv1 < pv2);
 
 end
